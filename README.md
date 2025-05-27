@@ -69,15 +69,46 @@ A Java Swing application for managing a library system, including user roles (ad
 
 4.  **Compile and Run:**
     *   Navigate to the project root directory in your terminal.
-    *   Make the `compile_and_run.sh` script executable (if it isn't already):
-        ```bash
-        chmod +x compile_and_run.sh
-        ```
-    *   Run the script:
-        ```bash
-        ./compile_and_run.sh
-        ```
-    This script will clean old class files, compile all Java source files into the `bin/` directory, and then run the application (`GUI.Main`).
+    *   **For Linux/macOS users:**
+        *   Make the `compile_and_run.sh` script executable (if it isn't already):
+            ```bash
+            chmod +x compile_and_run.sh
+            ```
+        *   Run the script:
+            ```bash
+            ./compile_and_run.sh
+            ```
+        This script will clean old class files, compile all Java source files into the `bin/` directory, and then run the application (`GUI.Main`).
+    *   **For Windows users:**
+        *   Open Command Prompt or PowerShell in the project root directory.
+        *   **Clean old class files (optional but recommended):**
+            ```batch
+            del /s /q "src\main\java\**\*.class"
+            del /s /q "bin\*.class"
+            rd /s /q "bin"
+            ```
+        *   **Create the output directory if it doesn't exist:**
+            ```batch
+            if not exist bin mkdir bin
+            ```
+        *   **Compile the Java source files:**
+            You'll need to list all `.java` files. An easy way to get all `.java` files recursively from `src/main/java` is to use a `for` loop in the command prompt or `Get-ChildItem` in PowerShell.
+
+            *   **Command Prompt:**
+                ```batch
+                javac -cp "lib\flatlaf-3.6.jar;lib\mysql-connector-j-9.3.0.jar;src\main\resources" -d bin @(for /R "src\main\java" %f in (*.java) do @echo "%f")
+                ```
+                *(Note: If running this directly in a `.bat` script, replace `%f` with `%%f`)*
+            *   **PowerShell:**
+                ```powershell
+                $javaFiles = Get-ChildItem -Path "src\main\java" -Recurse -Filter *.java | ForEach-Object { $_.FullName }
+                javac -cp "lib\flatlaf-3.6.jar;lib\mysql-connector-j-9.3.0.jar;src\main\resources" -d bin $javaFiles
+                ```
+        *   **Run the application:**
+            ```batch
+            java -cp "bin;lib\flatlaf-3.6.jar;lib\mysql-connector-j-9.3.0.jar;src\main\resources" GUI.Main
+            ```
+        *   **Alternative for Windows users:** Consider using Git Bash or Windows Subsystem for Linux (WSL) to use the `./compile_and_run.sh` script directly.
 
 ## Project Structure
 
