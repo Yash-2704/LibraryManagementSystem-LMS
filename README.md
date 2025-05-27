@@ -1,4 +1,4 @@
-# Library System GUI
+# Library Management System
 
 A Java Swing application for managing a library system, including user roles (admin, librarian, user), book management, issue requests, and a themeable user interface with light and dark modes powered by FlatLaf.
 
