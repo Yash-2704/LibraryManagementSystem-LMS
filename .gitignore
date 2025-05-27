@@ -1,0 +1,24 @@
+# Compiled output
+bin/
+
+# Java class files (anywhere in src, just in case)
+src/**/*.class
+
+# Ignore IDE-specific files
+*.iml
+.idea/
+*.vscode/
+
+# Ignore OS-specific files
+.DS_Store
+
+# Ignore logs
+*.log
+
+# Ignore other unnecessary files
+*.tmp
+*.bak
+*.swp
+
+# Example for ignoring specific JARs if needed, but we want to keep lib/
+# my-specific-jar.jar
